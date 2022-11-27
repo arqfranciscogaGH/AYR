@@ -1,0 +1,197 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using  Sitio;
+namespace Sitio
+{
+    public partial class Pregistro : System.Web.UI.Page
+    {
+        private db_conexion db = new db_conexion();
+        static int id = 0;
+        static PreRegistro registro;
+        static bool agregar = false;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            String argumento = Request.QueryString["id"];
+            db = new db_conexion();
+            lblOperacion.Text = "";
+            if (!IsPostBack)
+            {
+                    if (argumento != null && argumento != String.Empty)
+                    {
+                        agregar = false;
+                        id = int.Parse(argumento);
+                        registro = db.PreRegistro.Find(id);
+                        limpiar();
+                        asignar(id);
+                    }
+                    else
+                    {
+                        agregar = true;
+                        registro = new PreRegistro();
+                        limpiar();
+                    }
+             }
+            if (agregar)
+                btnRegresar.Visible = false;
+            else
+                btnRegresar.Visible = true;
+        }
+
+        
+        protected void btnRegresar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("PreRegistros", false);
+        }
+        protected void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            btnRegistrar.Enabled = false;
+            lblOperacion.Text = "";
+            db = new db_conexion();
+          
+            registro.nombre = txtNombre.Text;
+            if (txtEdad.Text!="")
+            {
+                registro.edad = int.Parse(txtEdad.Text);
+                int anios = (registro.edad.Value * -1);
+                registro.fechaNacimiento = DateTime.Now.AddYears(anios);
+            }
+            registro.genero = rblGenero.SelectedValue;
+            registro.correo = txtCorreo.Text;
+            registro.telefono = txtTelefono.Text;
+            if  (!agregar)
+            {
+                registro.estadoCivil = rblEstadoCivil.SelectedValue;
+                registro.religion = txtReligion.Text;
+                registro.tieneReligion = registro.religion.Length == 0 ? false : true;
+                registro.congregacion = txtCongregacion.Text;
+                registro.tieneCongregacion = registro.congregacion.Length == 0 ? false : true;
+                if (cvEstatus.Checked == true)
+                    registro.estatus = 1;
+                else
+                    registro.estatus = 0;
+               
+            }
+     
+            registro.enfermedad = txtEnfermedad.Text;
+            registro.tieneEnfermedad = registro.enfermedad.Length == 0 ? false : true;
+            registro.tieneRetiroT = cvRetiro.Checked;
+
+            registro.invitador = txtInvitador.Text;
+
+            
+            string mensaje = String.Empty;
+            if (agregar)
+            {
+                registro.estatus = 1;
+                registro = db.PreRegistro.Add(registro);
+                int r = db.SaveChanges();
+                String folio = registro.id.ToString();
+                mensaje = "Se agregó exitosamente el folio: " + folio ;
+            }
+            else
+            {
+                db.Entry(registro).State = EntityState.Modified;
+                int r = db.SaveChanges(); 
+                String folio = registro.id.ToString();
+                mensaje = "Se actualizó  exitosamenteel folio: " + folio;
+          
+            }
+            lblOperacion.Text = mensaje;
+            string script = "alert('" + mensaje + " ');";
+
+            //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
+            btnRegistrar.Enabled = true;
+        }
+        void limpiar()
+        {
+
+            if (agregar)
+            {
+                rblEstadoCivil.Visible = false;
+                txtReligion.Visible = false;
+                txtCongregacion.Visible = false;
+                cvEstatus.Visible = false;
+
+                lblTelefono.Visible = false;
+                txtTelefono.Visible = false;
+                lblCorreo.Visible = false;
+                txtCorreo.Visible = false;
+
+                lblEstadoCivil.Visible = false;
+                lblReligion.Visible = false;
+                lblCongregacion.Visible = false;
+                lblEstatus.Visible = false;
+
+                // Inicializar  entidad
+                registro = new PreRegistro();
+                registro.estatus = 1;
+                registro.estadoCivil = "";
+                registro.edad = 0;
+                registro.telefono = "";
+                registro.correo = "";
+                registro.enfermedad = "";
+                registro.religion = "";
+                registro.congregacion = "";
+
+            }
+            else
+            {
+                rblEstadoCivil.Visible = true;
+                txtReligion.Visible = true;
+                txtCongregacion.Visible = true;
+                cvEstatus.Visible = true;
+
+                lblTelefono.Visible = true;
+                txtTelefono.Visible = true;
+                lblCorreo.Visible = true;
+                txtCorreo.Visible = true;
+
+                lblEstadoCivil.Visible = true;
+                lblReligion.Visible = true;
+                lblCongregacion.Visible = true;
+                lblEstatus.Visible = true;
+
+            }
+
+
+            txtNombre.Text = "";
+            txtEdad.Text = "";
+            txtTelefono.Text = "";
+            txtCorreo.Text = "";
+            txtReligion.Text = "";
+            txtCongregacion.Text = "";
+            txtEnfermedad.Text = "";
+            txtInvitador.Text = "";
+            cvRetiro.Checked = false;
+            cvEstatus.Checked = false;
+       
+        }
+        void asignar(int id)
+        {
+            txtNombre.Text = registro.nombre;
+            txtEdad.Text = registro.edad.ToString();
+            rblGenero.SelectedValue = registro.genero;
+            txtCorreo.Text = registro.correo;
+            txtTelefono.Text = registro.telefono;
+    
+            rblEstadoCivil.SelectedValue = registro.estadoCivil;
+            txtReligion.Text = registro.religion;
+            txtCongregacion.Text = registro.congregacion;
+            txtEnfermedad.Text = registro.enfermedad;
+            cvRetiro.Checked = (bool) (registro.tieneRetiroT==null?false: registro.tieneRetiroT);
+            txtInvitador.Text = registro.invitador;
+            cvEstatus.Checked = (bool)(registro.estatus == null || registro.estatus == 0 ? false : true);
+            
+        }
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            limpiar();
+        }
+    }
+}

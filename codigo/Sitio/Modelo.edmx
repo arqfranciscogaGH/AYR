@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Modelo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="PreRegistro">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="150" />
+          <Property Name="genero" Type="nvarchar" MaxLength="1" />
+          <Property Name="edad" Type="int" />
+          <Property Name="fechaNacimiento" Type="date" />
+          <Property Name="estadoCivil" Type="nvarchar" MaxLength="1" />
+          <Property Name="telefono" Type="nvarchar(max)" />
+          <Property Name="correo" Type="nvarchar(max)" />
+          <Property Name="tieneReligion" Type="bit" />
+          <Property Name="religion" Type="nvarchar" MaxLength="100" />
+          <Property Name="tieneCongregacion" Type="bit" />
+          <Property Name="congregacion" Type="nvarchar" MaxLength="100" />
+          <Property Name="tieneEnfermedad" Type="bit" />
+          <Property Name="enfermedad" Type="nvarchar" MaxLength="100" />
+          <Property Name="tieneRetiroT" Type="bit" />
+          <Property Name="invitador" Type="nvarchar" MaxLength="100" />
+          <Property Name="descripcion" Type="nvarchar(max)" />
+          <Property Name="info" Type="nvarchar(max)" />
+          <Property Name="notas" Type="nvarchar(max)" />
+          <Property Name="idSuscriptor" Type="int" />
+          <Property Name="estatus" Type="smallint" />
+          <Property Name="clase" Type="varchar(max)" />
+          <Property Name="ministerios" Type="varchar(max)" />
+        </EntityType>
+        <Function Name="PaginarPreRegistro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pagenum" Type="int" Mode="In" />
+          <Parameter Name="pagesize" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="ModeloStoreContainer">
+          <EntitySet Name="PreRegistro" EntityType="Self.PreRegistro" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Modelo" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="db_conexion" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PreRegistro" EntityType="Modelo.PreRegistro" />
+          <FunctionImport Name="PaginarPreRegistro" ReturnType="Collection(Modelo.PaginarPreRegistro_Result)">
+            <Parameter Name="pagenum" Mode="In" Type="Int32" />
+            <Parameter Name="pagesize" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="PreRegistro">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="genero" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="edad" Type="Int32" />
+          <Property Name="fechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="estadoCivil" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="correo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tieneReligion" Type="Boolean" />
+          <Property Name="religion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="tieneCongregacion" Type="Boolean" />
+          <Property Name="congregacion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="tieneEnfermedad" Type="Boolean" />
+          <Property Name="enfermedad" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="tieneRetiroT" Type="Boolean" />
+          <Property Name="invitador" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="notas" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="idSuscriptor" Type="Int32" />
+          <Property Name="estatus" Type="Int16" />
+          <Property Name="clase" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ministerios" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="PaginarPreRegistro_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="genero" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="edad" Nullable="true" />
+          <Property Type="DateTime" Name="fechaNacimiento" Nullable="true" />
+          <Property Type="String" Name="estadoCivil" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="telefono" Nullable="true" />
+          <Property Type="String" Name="correo" Nullable="true" />
+          <Property Type="Boolean" Name="tieneReligion" Nullable="true" />
+          <Property Type="String" Name="religion" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="tieneCongregacion" Nullable="true" />
+          <Property Type="String" Name="congregacion" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="tieneEnfermedad" Nullable="true" />
+          <Property Type="String" Name="enfermedad" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="tieneRetiroT" Nullable="true" />
+          <Property Type="String" Name="invitador" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="descripcion" Nullable="true" />
+          <Property Type="String" Name="info" Nullable="true" />
+          <Property Type="String" Name="notas" Nullable="true" />
+          <Property Type="Int32" Name="idSuscriptor" Nullable="true" />
+          <Property Type="Int16" Name="estatus" Nullable="true" />
+          <Property Type="String" Name="clase" Nullable="true" />
+          <Property Type="String" Name="ministerios" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModeloStoreContainer" CdmEntityContainer="db_conexion">
+          <EntitySetMapping Name="PreRegistro">
+            <EntityTypeMapping TypeName="Modelo.PreRegistro">
+              <MappingFragment StoreEntitySet="PreRegistro">
+                <ScalarProperty Name="ministerios" ColumnName="ministerios" />
+                <ScalarProperty Name="clase" ColumnName="clase" />
+                <ScalarProperty Name="estatus" ColumnName="estatus" />
+                <ScalarProperty Name="idSuscriptor" ColumnName="idSuscriptor" />
+                <ScalarProperty Name="notas" ColumnName="notas" />
+                <ScalarProperty Name="info" ColumnName="info" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="invitador" ColumnName="invitador" />
+                <ScalarProperty Name="tieneRetiroT" ColumnName="tieneRetiroT" />
+                <ScalarProperty Name="enfermedad" ColumnName="enfermedad" />
+                <ScalarProperty Name="tieneEnfermedad" ColumnName="tieneEnfermedad" />
+                <ScalarProperty Name="congregacion" ColumnName="congregacion" />
+                <ScalarProperty Name="tieneCongregacion" ColumnName="tieneCongregacion" />
+                <ScalarProperty Name="religion" ColumnName="religion" />
+                <ScalarProperty Name="tieneReligion" ColumnName="tieneReligion" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="estadoCivil" ColumnName="estadoCivil" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="PaginarPreRegistro" FunctionName="Modelo.Store.PaginarPreRegistro">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Modelo.PaginarPreRegistro_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="estadoCivil" ColumnName="estadoCivil" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="tieneReligion" ColumnName="tieneReligion" />
+                <ScalarProperty Name="religion" ColumnName="religion" />
+                <ScalarProperty Name="tieneCongregacion" ColumnName="tieneCongregacion" />
+                <ScalarProperty Name="congregacion" ColumnName="congregacion" />
+                <ScalarProperty Name="tieneEnfermedad" ColumnName="tieneEnfermedad" />
+                <ScalarProperty Name="enfermedad" ColumnName="enfermedad" />
+                <ScalarProperty Name="tieneRetiroT" ColumnName="tieneRetiroT" />
+                <ScalarProperty Name="invitador" ColumnName="invitador" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="info" ColumnName="info" />
+                <ScalarProperty Name="notas" ColumnName="notas" />
+                <ScalarProperty Name="idSuscriptor" ColumnName="idSuscriptor" />
+                <ScalarProperty Name="estatus" ColumnName="estatus" />
+                <ScalarProperty Name="clase" ColumnName="clase" />
+                <ScalarProperty Name="ministerios" ColumnName="ministerios" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

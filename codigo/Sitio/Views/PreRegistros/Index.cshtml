@@ -1,0 +1,231 @@
+﻿@*@model IEnumerable<Sitio.PreRegistro>*@
+@model Sitio.Comun.Clases.Paginador<Sitio.PreRegistro>
+@using GridMvc.Html
+
+
+@{
+    ViewBag.Title = "Lista";
+}
+
+<h2>Index</h2>
+
+
+@*@Html.ActionLink("Agregar ", "Create")*@
+<script type="text/javascript">
+        $("#txtTextoBusqueda").autocomplete({
+            source: '@Url.Action("Buscar")'
+        });
+</script>
+<input type="text" id="txtTextoBusqueda" />
+@using (Html.BeginForm("Index", "PreRegistros", FormMethod.Get))
+{
+    <p>
+        Invitador : @Html.DropDownList("invitador", "Todos")
+        Nombre: @Html.TextBox("filtro")
+
+        <input type="submit" value="Buscar" class="Boton BordeAbajo Ch ColorTema " />
+        <a href="~/PreRegistro.aspx" class="Boton BordeAbajo Ch ColorTema">Agregar  </a>
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Nombre
+        </th>
+        <th>
+            Género
+        </th>
+        <th>
+            Edad
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.fechaNacimiento)
+            </th>*@
+        <th>
+            Estado Civil
+        </th>
+        <th>
+            Teléfono
+        </th>
+        <th>
+            Correo
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.tieneReligion)
+            </th>*@
+        <th>
+            Religión
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.tieneCongregacion)
+            </th>*@
+        <th>
+            Congregación
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.tieneEnfermedad)
+            </th>*@
+        <th>
+            Enfermedad
+        </th>
+
+        <th>
+            Invitador
+        </th>
+        <th>
+            Asistió a retiro
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.info)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.notas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.idSuscriptor)
+            </th>*@
+        <th>
+            Acción
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Resultado)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.genero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.edad)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.fechaNacimiento)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.estadoCivil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.correo)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.tieneReligion)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.religion)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.tieneCongregacion)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.congregacion)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.tieneEnfermedad)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.enfermedad)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.invitador)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.tieneRetiroT)*@
+                @(item.tieneRetiroT == false  ? "No" : "Si")
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.info)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.notas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idSuscriptor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estatus)
+                </td>*@
+            <td>
+
+
+                @*@Html.ActionLink("Consultar", "Details", new { id = item.id })*@
+                @*@Html.ActionLink("Modificar", "Edit", new { id = item.id })*@
+                <a href="~/PreRegistro.aspx?id=@item.id" class="Boton BordeAbajo Ch ColorTema ">Modificar</a>
+                @*<a href="/PreRegistro.aspx?id=@item.id" class="btn btn-sm btn-primary"> <i class="fa-solid fa-pencil"></i> Modificar </a>*@
+                @*@Html.ActionLink("Eliminar", "Delete", new { id = item.id })*@
+
+            </td>
+        </tr>
+    }
+
+</table>
+@if (Model.Resultado.Count() > 0)
+{
+    <span>
+        <strong>@Model.TotalRegistros</strong> registros encontrados
+    </span>
+    <span>&nbsp;|&nbsp;</span>
+    <span>
+        Página <strong>@(Model.PaginaActual)</strong> de
+        <strong>@Model.TotalPaginas</strong>
+    </span>
+    <span>&nbsp;|&nbsp;</span>
+}
+else
+{
+    <span>No hay resultados para esta búsqueda</span>
+    <span>&nbsp;|&nbsp;</span>
+}
+@if (Model.PaginaActual > 1)
+{
+    @Html.ActionLink("Inicio", "Index", new { pagina = 1 },
+                    new { @class = "btn btn-sm btn-default" })
+    <span></span>
+    @Html.ActionLink("Anterior", "Index", new { pagina = Model.PaginaActual - 1 },
+                    new { @class = "btn btn-sm btn-default" })
+}
+else
+{
+    @Html.ActionLink("Inicio", "Index", new { pagina = 1 },
+                    new { @class = "btn btn-sm btn-default disabled" })
+    <span></span>
+    @Html.ActionLink("Anterior", "Index", new { pagina = 1 },
+                    new { @class = "btn btn-sm btn-default disabled" })
+}
+<span></span>
+@if (Model.PaginaActual < Model.TotalPaginas)
+{
+    @Html.ActionLink("Siguiente", "Index", new { pagina = Model.PaginaActual + 1 },
+                    new { @class = "btn btn-sm btn-default" })
+    <span></span>
+    @Html.ActionLink("Final", "Index", new { pagina = Model.TotalPaginas },
+                    new { @class = "btn btn-sm btn-default" })
+}
+else
+{
+    @Html.ActionLink("Siguiente", "Index", new { pagina = Model.TotalPaginas - 1 },
+                    new { @class = "btn btn-sm btn-default disabled" })
+    <span></span>
+    @Html.ActionLink(">>", "Index", new { pagina = Model.TotalPaginas },
+                    new { @class = "btn btn-sm btn-default disabled" })
+}
