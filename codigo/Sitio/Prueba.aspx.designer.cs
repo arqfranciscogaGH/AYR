@@ -11,7 +11,7 @@ namespace Sitio
 {
 
 
-    public partial class Pregistro
+    public partial class Prueba
     {
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PreRegistro.aspx.cs" Inherits="Sitio.Pregistro" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Prueba.aspx.cs" Inherits="Sitio.Prueba" %>
 
 
 <!DOCTYPE html>
@@ -29,8 +29,9 @@
 
     <link href="Comun/LibreriasIconos/fontello/css/fontello.css" rel="stylesheet" />
     <link href="Comun/LibreriasIconos/fontello/css/animation.css" rel="stylesheet" />
-    <link href="Content/Site.css" rel="stylesheet" />
+
     <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
 </head>
 <body>
     <form id="formularion" runat="server">
@@ -49,7 +50,6 @@
 
                  <h4>   R  E  G  I  S  T  R  O </h4>
                  <br />
-
                  <asp:Label runat="server" Text="Nombre" CssClass="Etiqueta Gde" ></asp:Label>
                  <asp:TextBox runat="server"  ID="txtNombre" CssClass="CajaTexto BordeIzq ColorTema" Width="250px"></asp:TextBox>
                  <asp:RequiredFieldValidator id="RequiredFieldValidator2"
@@ -57,7 +57,7 @@
                  Text="Ingrese el nombre por favor"
                  EnableClientScript="true"
                  CssClass="Validador"
-                  runat="server"/>
+                 runat="server"/>
                  <br />
                  <asp:Label runat="server" Text="Edad" CssClass="Etiqueta Gde" ></asp:Label>
                  <asp:TextBox runat="server"  ID="txtEdad" CssClass="CajaTexto BordeIzq ColorTema" Width="250px"></asp:TextBox>

@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 using  Sitio;
 namespace Sitio
 {
-    public partial class Pregistro : System.Web.UI.Page
+    public partial class Prueba : System.Web.UI.Page
     {
         private db_conexion db = new db_conexion();
         static int id = 0;
@@ -22,21 +22,21 @@ namespace Sitio
             lblOperacion.Text = "";
             if (!IsPostBack)
             {
-                    if (argumento != null && argumento != String.Empty)
-                    {
-                        agregar = false;
-                        id = int.Parse(argumento);
-                        registro = db.PreRegistro.Find(id);
-                        limpiar();
-                        asignar(id);
-                    }
-                    else
-                    {
-                        agregar = true;
-                        registro = new PreRegistro();
-                        limpiar();
-                    }
-             }
+                if (argumento != null && argumento != String.Empty)
+                {
+                    agregar = false;
+                    id = int.Parse(argumento);
+                    registro = db.PreRegistro.Find(id);
+                    limpiar();
+                    asignar(id);
+                }
+                else
+                {
+                    agregar = true;
+                    registro = new PreRegistro();
+                    limpiar();
+                }
+            }
             if (agregar)
             {
                 btnRegresar.Visible = false;
@@ -47,10 +47,10 @@ namespace Sitio
                 btnRegresar.Visible = true;
                 btnLimpiar.Visible = false;
             }
-            
+
         }
 
-        
+
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
             Response.Redirect("PreRegistros", false);
@@ -60,9 +60,9 @@ namespace Sitio
             btnRegistrar.Enabled = false;
             lblOperacion.Text = "";
             db = new db_conexion();
-          
+
             registro.nombre = txtNombre.Text;
-            if (txtEdad.Text!="")
+            if (txtEdad.Text != "")
             {
                 registro.edad = int.Parse(txtEdad.Text);
                 int anios = (registro.edad.Value * -1);
@@ -70,9 +70,9 @@ namespace Sitio
             }
             registro.genero = rblGenero.SelectedValue;
 
-            if  (!agregar)
+            if (!agregar)
             {
-                registro.clase= txtGrupo.Text;
+                registro.clase = txtGrupo.Text;
                 registro.correo = txtCorreo.Text;
                 registro.telefono = txtTelefono.Text;
                 registro.estadoCivil = rblEstadoCivil.SelectedValue;
@@ -88,11 +88,11 @@ namespace Sitio
                     registro.estatus = 1;
                 else
                     registro.estatus = 0;
-               
+
             }
-     
+
             registro.invitador = txtInvitador.Text;
-            
+
             string mensaje = String.Empty;
             if (agregar)
             {
@@ -100,15 +100,15 @@ namespace Sitio
                 registro = db.PreRegistro.Add(registro);
                 int r = db.SaveChanges();
                 String folio = registro.id.ToString();
-                mensaje = "Se agregó el folio: " + folio ;
+                mensaje = "Se agregó exitosamente el folio: " + folio;
             }
             else
             {
                 db.Entry(registro).State = EntityState.Modified;
-                int r = db.SaveChanges(); 
+                int r = db.SaveChanges();
                 String folio = registro.id.ToString();
-                mensaje = "Se actualizó el folio: " + folio;
-          
+                mensaje = "Se actualizó  exitosamenteel folio: " + folio;
+
             }
             if (agregar)
                 limpiar();
@@ -116,7 +116,7 @@ namespace Sitio
             string script = "alert('" + mensaje + " ');";
 
             //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
-         
+
         }
         void limpiar()
         {
@@ -192,7 +192,7 @@ namespace Sitio
             txtInvitador.Text = "";
             cvRetiro.Checked = false;
             cvEstatus.Checked = false;
-       
+
         }
         void asignar(int id)
         {
@@ -202,15 +202,15 @@ namespace Sitio
             rblGenero.SelectedValue = registro.genero;
             txtCorreo.Text = registro.correo;
             txtTelefono.Text = registro.telefono;
-    
+
             rblEstadoCivil.SelectedValue = registro.estadoCivil;
             txtReligion.Text = registro.religion;
             txtCongregacion.Text = registro.congregacion;
             txtEnfermedad.Text = registro.enfermedad;
-            cvRetiro.Checked = (bool) (registro.tieneRetiroT==null?false: registro.tieneRetiroT);
+            cvRetiro.Checked = (bool)(registro.tieneRetiroT == null ? false : registro.tieneRetiroT);
             txtInvitador.Text = registro.invitador;
             cvEstatus.Checked = (bool)(registro.estatus == null || registro.estatus == 0 ? false : true);
-            
+
         }
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {

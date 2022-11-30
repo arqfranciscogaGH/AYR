@@ -5,6 +5,7 @@ using System.Web;
 
 namespace Sitio.Comun.Clases
 {
+
     public class Paginador<T> where T : class
     {
         public int PaginaActual { get; set; }

@@ -14,7 +14,8 @@ namespace Sitio.Controllers
     public class PreRegistrosController : Controller
     {
         private db_conexion db = new db_conexion();
-
+        static List<Columna> columnas = new  List<Columna>();
+        static Columna columnaActual ;
         public JsonResult Buscar(string query)
         {
             IQueryable<PreRegistro> preRegistros = db.PreRegistro.Where(s => s.estatus == 1);
@@ -29,16 +30,42 @@ namespace Sitio.Controllers
         //    return View(db.PreRegistro.Where(s=>s.estatus==1).ToList());
         //}
         //[HttpPost]
-        public ActionResult Index(String invitador, String filtro, int pagina = 1)
+        public ActionResult Index(String invitador, String grupo,  String filtro, String columanOrden,  int pagina = 1)
         {
             // Número total de registros de la tabla Customers
             int _RegistrosPorPagina = 10;
             int _TotalRegistros = 0;
+            //
+            // seleccionar  ordernar por columna y se define  y guarda la  columna
+            //
+   
+            if (!string.IsNullOrEmpty(columanOrden))
+            {
+                Columna columna;
+                ViewBag.columanOrden = columanOrden;
+                columna = columnas.Where(s => s.Nombre.Contains(columanOrden)).FirstOrDefault();
+                if (columna == null)
+                {
+                    columna = new Columna { Nombre = columanOrden, Orden = "Asc" };
+                    columnas.Add(columna);
+                }
+                else
+                {
+                    if (columna.Orden == "Asc")
+                        columna.Orden = "Desc";
+                    else
+                        columna.Orden = "Asc";
+                }
+                columnaActual = columna;
+            }
+       
 
-            
-
+  
+            //
+            // obtene  info de  listas 
+            //
             // obtener lista de  personal que invita
-            var _listaInvitador= new List<string>();
+            var _listaInvitador = new List<string>();
 
             var consulta_Invitador = from d in db.PreRegistro
                            where  d.estatus==1
@@ -50,7 +77,31 @@ namespace Sitio.Controllers
             _listaInvitador.AddRange(consulta_Invitador.Distinct());
             ViewBag.invitador = new SelectList(_listaInvitador);
 
-           //  obtener pregistros
+
+
+
+
+            // obtener lista de  personal que invita
+            var _listaGrupo = new List<string>();
+
+            var consulta_Grupo = from d in db.PreRegistro
+                                     where d.estatus == 1
+                                     orderby d.clase
+                                     select d.clase;
+            //var x = db.PreRegistro.Select(r => r.invitador).Distinct();
+
+
+            _listaGrupo.AddRange(consulta_Grupo.Distinct());
+            ViewBag.grupo = new SelectList(_listaGrupo);
+
+
+
+
+
+
+            //   filtrar  de registros
+            //  obtener pregistros
+
 
             IQueryable<PreRegistro> preRegistros = db.PreRegistro.Where(s => s.estatus == 1);
             _TotalRegistros = preRegistros.Count();
@@ -62,11 +113,74 @@ namespace Sitio.Controllers
             {
                 preRegistros = preRegistros.Where(s => s.invitador.Contains(invitador));
             }
-       
+            if (!string.IsNullOrEmpty(grupo))
+            {
+                preRegistros = preRegistros.Where(s => s.clase.Contains(grupo));
+            }
 
-            // Obtenemos la 'página de registros' de la tabla Customers
-            preRegistros = preRegistros.OrderBy(s=>s.id).Skip((pagina - 1) * _RegistrosPorPagina)
+
+  
+
+
+            //  orden de  columnas 
+            if (columnaActual != null)
+            {
+                if (columnaActual.Nombre == "id")
+                {
+                    if (columnaActual.Orden == "Asc")
+                        preRegistros = preRegistros.OrderBy(s => s.id).Skip((pagina - 1) * _RegistrosPorPagina)
                                              .Take(_RegistrosPorPagina);
+                    else
+                        preRegistros = preRegistros.OrderByDescending(s => s.id).Skip((pagina - 1) * _RegistrosPorPagina)
+                                             .Take(_RegistrosPorPagina);
+                }
+                if (columnaActual.Nombre == "nombre")
+                {
+                    if (columnaActual.Orden == "Asc")
+                        preRegistros = preRegistros.OrderBy(s => s.nombre).Skip((pagina - 1) * _RegistrosPorPagina)
+                                             .Take(_RegistrosPorPagina);
+                    else
+                        preRegistros = preRegistros.OrderByDescending(s => s.nombre).Skip((pagina - 1) * _RegistrosPorPagina)
+                                             .Take(_RegistrosPorPagina);
+                }
+                if (columnaActual.Nombre == "genero")
+                {
+                    if (columnaActual.Orden == "Asc")
+                        preRegistros = preRegistros.OrderBy(s => s.genero).Skip((pagina - 1) * _RegistrosPorPagina)
+                                             .Take(_RegistrosPorPagina); 
+                    else
+                        preRegistros = preRegistros.OrderByDescending(s => s.genero).Skip((pagina - 1) * _RegistrosPorPagina)
+                                             .Take(_RegistrosPorPagina);
+                }
+                if (columnaActual.Nombre == "edad")
+                {
+                    if (columnaActual.Orden == "Asc")
+                        preRegistros = preRegistros.OrderBy(s => s.edad).Skip((pagina - 1) * _RegistrosPorPagina)
+                                             .Take(_RegistrosPorPagina);
+                    else
+                        preRegistros = preRegistros.OrderByDescending(s => s.edad).Skip((pagina - 1) * _RegistrosPorPagina)
+                                             .Take(_RegistrosPorPagina);
+                }
+                if (columnaActual.Nombre == "grupo")
+                {
+                    if (columnaActual.Orden == "Asc")
+                        preRegistros = preRegistros.OrderBy(s => s.clase).Skip((pagina - 1) * _RegistrosPorPagina)
+                                             .Take(_RegistrosPorPagina); 
+                    else
+                        preRegistros = preRegistros.OrderByDescending(s => s.clase).Skip((pagina - 1) * _RegistrosPorPagina)
+                                             .Take(_RegistrosPorPagina); 
+                }
+
+            }
+            else
+            {
+                //  paginación 
+
+                // Obtenemos la 'página de registros' de la tabla Customers
+                preRegistros = preRegistros.OrderBy(s => s.id).Skip((pagina - 1) * _RegistrosPorPagina)
+                                                 .Take(_RegistrosPorPagina);
+            }
+
 
             // Número total de páginas de la tabla Customers
             var _TotalPaginas = (int)Math.Ceiling((double)_TotalRegistros / _RegistrosPorPagina);
@@ -82,7 +196,7 @@ namespace Sitio.Controllers
             // Enviamos a la Vista la 'Clase de paginación'
             return View(_Paginador);
             //return View(db.PreRegistro.Where(s => s.estatus == 1).ToList());
-        }
+            }
         // GET: PreRegistros/Details/5
         public ActionResult Details(int? id)
         {

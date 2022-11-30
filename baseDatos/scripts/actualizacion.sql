@@ -1,9 +1,30 @@
 select id, nombre, invitador, estatus   from PreRegistro where estatus=1  and ( invitador  is null or invitador='' )
-select *   from PreRegistro where  nombre like '%Maribe%' or  nombre like '%rosa%'
+select *   from PreRegistro where  nombre like '%Miguel%' or  nombre like '%rosa%'
 
-select *   from PreRegistro where estatus=0
+update  PreRegistro
+set  clase='rojo' 
+where id
+in ( select id   from PreRegistro where  clase is null  or  clase='')
+update  PreRegistro
+set  clase='negro' 
+where id >0   and  id<20
+
+update  PreRegistro
+set  clase='azul' 
+where id >=21   and  id<=60
+
+update  PreRegistro
+set  clase='Verde' 
+where id >=59
+
+
+select id, Nombre , telefono  from PreRegistro where  telefono is  null
+select Nombre   from PreRegistro where estatus=0 or  estatus is  null
 select *   from PreRegistro where estatus=1
-select id, nombre, invitador   from PreRegistro where  id >  29 and  id < 40
+select id, nombre, invitador ,*  from PreRegistro where  id =  20
+
+
+
 
 update  PreRegistro
 set  invitador='Iglesia'
@@ -22,6 +43,17 @@ select id, nombre, invitador, estatus   from PreRegistro where id in (60,67,80 )
 update  PreRegistro
 set  invitador='Alondra Aguilar'
 where id in (60,67,80 )
+
+
+update  PreRegistro
+set  genero='H'
+where id in (47,48,77,81)
+
+update  PreRegistro
+set  genero='M'
+where id in (11,19,20,27,28,29,36,37,41,42 ,45,46,50,54,56,57,59,74,76,78)
+
+select id, nombre,genero , invitador, estatus   from PreRegistro  where  genero is  null or  genero=''
 
 select genero, count(*)  as cuenta  from PreRegistro
 where  estatus=1

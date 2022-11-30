@@ -11,19 +11,29 @@
 
 
 @*@Html.ActionLink("Agregar ", "Create")*@
-<script type="text/javascript">
-        $("#txtTextoBusqueda").autocomplete({
-            source: '@Url.Action("Buscar")'
-        });
-</script>
-<input type="text" id="txtTextoBusqueda" />
+@*<script type="text/javascript">
+            $("#txtTextoBusqueda").autocomplete({
+                source: '@Url.Action("Buscar")'
+            });
+    </script>*@
+@*<input type="text" id="txtTextoBusqueda" />*@
 @using (Html.BeginForm("Index", "PreRegistros", FormMethod.Get))
 {
     <p>
-        Invitador : @Html.DropDownList("invitador", "Todos")
-        Nombre: @Html.TextBox("filtro")
+        <label for="grupo" class="Etiqueta Gde"> Grupo</label>
+        @Html.DropDownList("grupo", "Todos")
+    </p>
+    <p>
+        <label for="invitador" class="Etiqueta Gde">Invitador</label>
+        @Html.DropDownList("invitador", "Todos")
+    </p>
 
-        <input type="submit" value="Buscar" class="Boton BordeAbajo Ch ColorTema " />
+    <p>
+        <label for="filtro" class="Etiqueta Gde">Nombre</label>
+        @Html.TextBox("filtro")
+    </p>
+    <p>
+        <input type="submit" value="Consultar" class="Boton BordeAbajo Ch ColorTema " />
         <a href="~/PreRegistro.aspx" class="Boton BordeAbajo Ch ColorTema">Agregar  </a>
     </p>
 }
@@ -31,20 +41,30 @@
 <table class="table">
     <tr>
         <th>
-            Id
+            Acción
         </th>
         <th>
-            Nombre
+            @Html.ActionLink("Id", "Index", new { columanOrden = "id" })
+        </th>
+
+        <th>
+            @Html.ActionLink("Nombre", "Index", new { columanOrden = "nombre" })
         </th>
         <th>
-            Género
+
+            @Html.ActionLink("Género", "Index", new { columanOrden = "genero" })
         </th>
         <th>
-            Edad
+            @Html.ActionLink("Edad", "Index", new { columanOrden = "edad" })
+
         </th>
         @*<th>
-                @Html.DisplayNameFor(model => model.fechaNacimiento)
-            </th>*@
+            @Html.DisplayNameFor(model => model.fechaNacimiento)
+        </th>*@
+
+        <th>
+            @Html.ActionLink("Grupo", "Index", new { columanOrden = "grupo" })
+        </th>
         <th>
             Estado Civil
         </th>
@@ -55,20 +75,20 @@
             Correo
         </th>
         @*<th>
-                @Html.DisplayNameFor(model => model.tieneReligion)
-            </th>*@
+            @Html.DisplayNameFor(model => model.tieneReligion)
+        </th>*@
         <th>
             Religión
         </th>
         @*<th>
-                @Html.DisplayNameFor(model => model.tieneCongregacion)
-            </th>*@
+            @Html.DisplayNameFor(model => model.tieneCongregacion)
+        </th>*@
         <th>
             Congregación
         </th>
         @*<th>
-                @Html.DisplayNameFor(model => model.tieneEnfermedad)
-            </th>*@
+            @Html.DisplayNameFor(model => model.tieneEnfermedad)
+        </th>*@
         <th>
             Enfermedad
         </th>
@@ -80,102 +100,104 @@
             Asistió a retiro
         </th>
         @*<th>
-                @Html.DisplayNameFor(model => model.descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.info)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.notas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.idSuscriptor)
-            </th>*@
-        <th>
-            Acción
+            @Html.DisplayNameFor(model => model.descripcion)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.info)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.notas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idSuscriptor)
+        </th>*@
+
         <th></th>
     </tr>
 
     @foreach (var item in Model.Resultado)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.genero)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.edad)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.fechaNacimiento)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.estadoCivil)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.telefono)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.correo)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.tieneReligion)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.religion)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.tieneCongregacion)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.congregacion)
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.tieneEnfermedad)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.enfermedad)
-            </td>
+<tr>
+    <td>
+        @*@Html.ActionLink("Consultar", "Details", new { id = item.id })*@
+        @*@Html.ActionLink("Modificar", "Edit", new { id = item.id })*@
+        <a href="~/PreRegistro.aspx?id=@item.id" class="Boton BordeAbajo Ch ColorTema ">Modificar</a>
+        @*<a href="/PreRegistro.aspx?id=@item.id" class="btn btn-sm btn-primary"> <i class="fa-solid fa-pencil"></i> Modificar </a>*@
+        @*@Html.ActionLink("Eliminar", "Delete", new { id = item.id })*@
 
-            <td>
-                @Html.DisplayFor(modelItem => item.invitador)
-            </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.tieneRetiroT)*@
-                @(item.tieneRetiroT == false  ? "No" : "Si")
-            </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.info)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.notas)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.idSuscriptor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.estatus)
-                </td>*@
-            <td>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.id)
+    </td>
 
+    <td>
+        @Html.DisplayFor(modelItem => item.nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.genero)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.edad)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.fechaNacimiento)
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.clase)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.estadoCivil)
+    </td>
 
-                @*@Html.ActionLink("Consultar", "Details", new { id = item.id })*@
-                @*@Html.ActionLink("Modificar", "Edit", new { id = item.id })*@
-                <a href="~/PreRegistro.aspx?id=@item.id" class="Boton BordeAbajo Ch ColorTema ">Modificar</a>
-                @*<a href="/PreRegistro.aspx?id=@item.id" class="btn btn-sm btn-primary"> <i class="fa-solid fa-pencil"></i> Modificar </a>*@
-                @*@Html.ActionLink("Eliminar", "Delete", new { id = item.id })*@
+    <td>
+        @Html.DisplayFor(modelItem => item.telefono)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.correo)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.tieneReligion)
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.religion)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.tieneCongregacion)
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.congregacion)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.tieneEnfermedad)
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.enfermedad)
+    </td>
 
-            </td>
-        </tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.invitador)
+    </td>
+    <td>
+        @*@Html.DisplayFor(modelItem => item.tieneRetiroT)*@
+        @(item.tieneRetiroT == false  ? "No" : "Si")
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.info)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.notas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idSuscriptor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estatus)
+        </td>*@
+
+</tr>
     }
 
 </table>
@@ -189,43 +211,45 @@
         Página <strong>@(Model.PaginaActual)</strong> de
         <strong>@Model.TotalPaginas</strong>
     </span>
-    <span>&nbsp;|&nbsp;</span>
+    <span>&nbsp; &nbsp;</span>
 }
 else
 {
     <span>No hay resultados para esta búsqueda</span>
-    <span>&nbsp;|&nbsp;</span>
+    <span>&nbsp; &nbsp;</span>
 }
-@if (Model.PaginaActual > 1)
-{
-    @Html.ActionLink("Inicio", "Index", new { pagina = 1 },
-                    new { @class = "btn btn-sm btn-default" })
+<p>
+    @if (Model.PaginaActual > 1)
+    {
+        @Html.ActionLink("Inicio", "Index", new { pagina = 1 },
+                        new { @class = "Boton BordeAbajo Ch ColorTema" })
+        <span></span>
+        @Html.ActionLink("Anterior", "Index", new { pagina = Model.PaginaActual - 1 },
+                        new { @class = "Boton BordeAbajo Ch ColorTema" })
+    }
+    else
+    {
+        @Html.ActionLink("Inicio", "Index", new { pagina = 1 },
+                        new { @class = "Boton BordeAbajo Ch ColorTema btn-default disabled" })
+        <span></span>
+        @Html.ActionLink("Anterior", "Index", new { pagina = 1 },
+                        new { @class = "Boton BordeAbajo Ch ColorTema btn-default disabled" })
+    }
     <span></span>
-    @Html.ActionLink("Anterior", "Index", new { pagina = Model.PaginaActual - 1 },
-                    new { @class = "btn btn-sm btn-default" })
-}
-else
-{
-    @Html.ActionLink("Inicio", "Index", new { pagina = 1 },
-                    new { @class = "btn btn-sm btn-default disabled" })
-    <span></span>
-    @Html.ActionLink("Anterior", "Index", new { pagina = 1 },
-                    new { @class = "btn btn-sm btn-default disabled" })
-}
-<span></span>
-@if (Model.PaginaActual < Model.TotalPaginas)
-{
-    @Html.ActionLink("Siguiente", "Index", new { pagina = Model.PaginaActual + 1 },
-                    new { @class = "btn btn-sm btn-default" })
-    <span></span>
-    @Html.ActionLink("Final", "Index", new { pagina = Model.TotalPaginas },
-                    new { @class = "btn btn-sm btn-default" })
-}
-else
-{
-    @Html.ActionLink("Siguiente", "Index", new { pagina = Model.TotalPaginas - 1 },
-                    new { @class = "btn btn-sm btn-default disabled" })
-    <span></span>
-    @Html.ActionLink(">>", "Index", new { pagina = Model.TotalPaginas },
-                    new { @class = "btn btn-sm btn-default disabled" })
-}
+    @if (Model.PaginaActual < Model.TotalPaginas)
+    {
+        @Html.ActionLink("Siguiente", "Index", new { pagina = Model.PaginaActual + 1 },
+                        new { @class = "Boton BordeAbajo Ch ColorTema" })
+        <span></span>
+        @Html.ActionLink("Final", "Index", new { pagina = Model.TotalPaginas },
+                        new { @class = "Boton BordeAbajo Ch ColorTema" })
+    }
+    else
+    {
+        @Html.ActionLink("Siguiente", "Index", new { pagina = Model.TotalPaginas - 1 },
+                        new { @class = "Boton BordeAbajo Ch ColorTema  btn-default disabled" })
+        <span></span>
+        @Html.ActionLink("Final", "Index", new { pagina = Model.TotalPaginas },
+                        new { @class = "Boton BordeAbajo Ch ColorTema  btn-default disabled" })
+    }
+</p>
