@@ -35,10 +35,10 @@ bld/
 # otros
 
 
-pubicacion/*
-Publicacion/*
-publicacion/*
-
+pubicacion/
+Publicacion/
+publicacion/
+*publicacion/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
