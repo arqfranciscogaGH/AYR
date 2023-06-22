@@ -1,0 +1,135 @@
+﻿@model IEnumerable<Sitio.CuentaUsuario>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cuenta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contrasena)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdEstacionTrabajo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdUsuarioSuperior)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaRegistro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaVigencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCambioEstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tema)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdEstatusUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Activo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdSuscriptor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sesiones)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Intentos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdIdioma)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Perfiles)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Grupos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Expira)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Privilegios)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cuenta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contrasena)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdEstacionTrabajo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdUsuarioSuperior)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaRegistro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaVigencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaCambioEstatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tema)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdEstatusUsuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Activo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdSuscriptor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sesiones)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Intentos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdIdioma)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Perfiles)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Grupos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Expira)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Privilegios)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdUsuario }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdUsuario }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdUsuario })
+        </td>
+    </tr>
+}
+
+</table>

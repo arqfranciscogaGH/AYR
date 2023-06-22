@@ -33,7 +33,7 @@ body {
     margin: 0px;
     /* padding-top: 50px;
     padding-bottom: 20px; */
-    background-color: #0866d7 !important;
+    background-color: #F0DFD5 !important;
     color: black !important;
 }
 .responsive-iframe {
@@ -46,23 +46,26 @@ body {
     height: 100%;
 }
 .Subtitulo {
-    color: #E6E6E6;
+    color: #764F09;
     font-size: 16px;
     font-weight: bold;
     /* font-style: italic; */
     font-family: Arial, Helvetica, sans-serif
 }
+.barraEncabezado {
+    background: #3e210f;
+}
 .Encabezado {
     box-sizing: border-box;
     z-index: 1000;
-    background-color: #0866d7;
+    background-color: #9D4B19;
     margin: 0;
-    padding:0;   
-    top:0;
-    left:0;
+    padding: 0;
+    top: 0;
+    left: 0;
     /* min-width: 150%;   */
-    width: 100%; 
-    height: 100%; 
+    width: 100%;
+    height: 100%;
     position: absolute;
     background: url('img/Encabezado.png') no-repeat left top;
     /* background-position: left top; */
@@ -117,9 +120,9 @@ body {
     /*width:100%;*/
 }
 
-.Etiqueta.ColorTema {
-    color: black;
-}
+    .Etiqueta.ColorTema {
+        color: black;
+    }
 
 /***  tamaños  de boton ***/
 
@@ -138,10 +141,11 @@ max-height: 20px;
 .Etiqueta.Gde {
     width: 20em;
 }
+
 /**     cajas de texto          **/
 
 
-.CajaTexto, input[type=text] {
+.CajaTexto, input[type=text] , input[type=number] , input[type=datetime] {
     box-sizing: border-box;
     min-width: 200px;
     max-height: 30px;
@@ -151,28 +155,41 @@ max-height: 20px;
     /*width:100%;*/
 }
 
-.CajaTexto.BordeIzq, input[type=text] {
-    border: 1px solid silver;
-    box-shadow: 1px 1px 1px 1px black;
-    border-left-width: 5px;
-    border-left-style: inset;
-    border-left-color: red;
-}
+    .CajaTexto.BordeIzq, input[type=text], input[type=number], input[type=datetime] {
+        border: 1px solid silver;
+        box-shadow: 1px 1px 1px 1px black;
+        border-left-width: 5px;
+        border-left-style: inset;
+        border-left-color: #9D4B19;
+    }
 
-.CajaTexto.BordeAbajo {
-    box-shadow: 1px 1px 1px 2px silver;
-    border-top-width: 0px;
-    border-left-width: 0px;
-    border-right-width: 0px;
-    border-bottom-width: 3px;
-    border-bottom-style: inset;
-    border-bottom-color: red;
-}
+    .CajaTexto.BordeAbajo {
+        box-shadow: 1px 1px 1px 2px silver;
+        border-top-width: 0px;
+        border-left-width: 0px;
+        border-right-width: 0px;
+        border-bottom-width: 3px;
+        border-bottom-style: inset;
+        border-bottom-color: #9D4B19;
+    }
 
 .CajaTexto.ColorTema {
     background: white;
     color: black;
 }
+
+.CajaTexto.Ch {
+    min-width: 6em;
+}
+
+.CajaTexto.Med {
+    width: 12em;
+}
+
+.CajaTexto.Gde {
+    width: 20em;
+}
+
 /**        estilo  de    textarea         ***/
 
 textarea {
@@ -186,7 +203,7 @@ textarea {
     box-shadow: 1px 1px 1px 2px black;
     border-left-width: 5px;
     border-left-style: inset;
-    border-left-color: red;
+    border-left-color: #9D4B19;
     /*min-height: 50px;
     padding: 0 12px;
     line-height: 1.42857;
@@ -204,12 +221,12 @@ textarea {
 }
 
 
-.CajaTexto:focus, .CajaTexto:hover, .CajaTexto.BordeIzq:hover, textarea:hover, input:focus, input[type=text]:focus, input[type=password]:focus, input[type=date]:focus, input[type=email]:focus {
-    border-bottom-width: 2px;
-    border-bottom-style: inset;
-    border-bottom-color: red;
-    color:red;
-}
+    .CajaTexto:focus, .CajaTexto:hover, .CajaTexto.BordeIzq:hover, textarea:hover, input:focus, input[type=text]:focus, input[type=password]:focus, input[type=date]:focus, input[type=email]:focus {
+        border-bottom-width: 2px;
+        border-bottom-style: inset;
+        border-bottom-color: #9D4B19;
+        color: black;
+    }
 
 
 
@@ -227,26 +244,26 @@ textarea {
 }
 
 
-.CajaVerificacion.BordeIzq, input[type=checkbox] {
-    border: 1px solid silver;
-    box-shadow: 1px 1px 1px 1px black;
-    border-left-width: 5px;
-    border-left-style: inset;
-    border-left-color: red;
-}
+    .CajaVerificacion.BordeIzq, input[type=checkbox] {
+        border: 1px solid silver;
+        box-shadow: 1px 1px 1px 1px black;
+        border-left-width: 5px;
+        border-left-style: inset;
+        border-left-color: #9D4B19;
+    }
 
 
 
 
-.CajaVerificacion.BordeAbajo {
-    box-shadow: 1px 1px 1px 2px silver;
-    border-top-width: 0px;
-    border-left-width: 0px;
-    border-right-width: 0px;
-    border-bottom-width: 3px;
-    border-bottom-style: inset;
-    border-bottom-color: red;
-}
+    .CajaVerificacion.BordeAbajo {
+        box-shadow: 1px 1px 1px 2px silver;
+        border-top-width: 0px;
+        border-left-width: 0px;
+        border-right-width: 0px;
+        border-bottom-width: 3px;
+        border-bottom-style: inset;
+        border-bottom-color: #9D4B19;
+    }
 
 .CajaVerificacion.ColorTema {
     background: white;
@@ -290,44 +307,44 @@ textarea {
     color: black;
 }
 
-.ListaDespegable.BordeIzq , select {
-    border: 1px solid silver;
-    box-shadow: 1px 1px 1px 1px black;
-    border-left-width: 5px;
-    border-left-style: inset;
-    border-left-color: red;
-}
+    .ListaDespegable.BordeIzq, select {
+        border: 1px solid silver;
+        box-shadow: 1px 1px 1px 1px black;
+        border-left-width: 5px;
+        border-left-style: inset;
+        border-left-color: #9D4B19;
+    }
 
-.ListaDespegable.BordeAbajo {
-    box-shadow: 1px 1px 1px 2px silver;
-    border-top-width: 0px;
-    border-left-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 3px;
-    border-bottom-style: inset;
-    border-bottom-color: red;
-}
+    .ListaDespegable.BordeAbajo {
+        box-shadow: 1px 1px 1px 2px silver;
+        border-top-width: 0px;
+        border-left-width: 1px;
+        border-right-width: 1px;
+        border-bottom-width: 3px;
+        border-bottom-style: inset;
+        border-bottom-color: #9D4B19;
+    }
 
-.ListaDespegable:focus, .ListaDespegable.BordeIzq:focus, select:focus {
-    border-bottom-width: 2px;
-    border-bottom-style: inset;
-    border-bottom-color: red;
-    color: black;
-}
+    .ListaDespegable:focus, .ListaDespegable.BordeIzq:focus, select:focus {
+        border-bottom-width: 2px;
+        border-bottom-style: inset;
+        border-bottom-color: #9D4B19;
+        color: black;
+    }
 
-.ListaDespegable:hover, .ListaDespegable.BordeIzq:hover, select:hover {
-    border-bottom-width: 2px;
-    border-bottom-style: inset;
-    border-bottom-color: red;
-    color: black;
-}
+    .ListaDespegable:hover, .ListaDespegable.BordeIzq:hover, select:hover {
+        border-bottom-width: 2px;
+        border-bottom-style: inset;
+        border-bottom-color: #9D4B19;
+        color: black;
+    }
 
-select:hover, select:focus {
-    border-bottom-width: 2px;
-    border-bottom-style: inset;
-    border-bottom-color: red;
-    color: black;
-}
+    select:hover, select:focus {
+        border-bottom-width: 2px;
+        border-bottom-style: inset;
+        border-bottom-color: #9D4B19;
+        color: black;
+    }
 
 
 .ListaDespegable.Ch {
@@ -361,24 +378,24 @@ select:hover, select:focus {
 }
 
 
-.ListaOpciones.BordeIzq ,  input[type=radio] {
-    border: 1px solid silver;
-    box-shadow: 1px 1px 1px 1px black;
-    border-left-width: 5px;
-    border-left-style: inset;
-    border-left-color: red;
-}
+    .ListaOpciones.BordeIzq, input[type=radio] {
+        border: 1px solid silver;
+        box-shadow: 1px 1px 1px 1px black;
+        border-left-width: 5px;
+        border-left-style: inset;
+        border-left-color: #9D4B19;
+    }
 
 
-.ListaOpciones.BordeAbajo {
-    box-shadow: 1px 1px 1px 2px silver;
-    border-top-width: 0px;
-    border-left-width: 1px;
-    border-right-width: 1px;
-    border-bottom-width: 3px;
-    border-bottom-style: inset;
-    border-bottom-color: red;
-}
+    .ListaOpciones.BordeAbajo {
+        box-shadow: 1px 1px 1px 2px silver;
+        border-top-width: 0px;
+        border-left-width: 1px;
+        border-right-width: 1px;
+        border-bottom-width: 3px;
+        border-bottom-style: inset;
+        border-bottom-color: #9D4B19;
+    }
 
 .ListaOpciones.ColorTema {
     /*background:rgba(255,255,255,.3);*/
@@ -386,12 +403,12 @@ select:hover, select:focus {
     color: black;
 }
 
-.ListaOpciones:focus, .ListaOpciones.BordeIzq:focus, input[type=radio]:focus, input[type=radio]:hover {
-    border-bottom-width: 2px;
-    border-bottom-style: inset;
-    border-bottom-color: red;
-    color:black;
-}
+    .ListaOpciones:focus, .ListaOpciones.BordeIzq:focus, input[type=radio]:focus, input[type=radio]:hover {
+        border-bottom-width: 2px;
+        border-bottom-style: inset;
+        border-bottom-color: #9D4B19;
+        color: black;
+    }
 
  .ListaOpciones.Ch {
         min-width: 6em;
@@ -415,7 +432,7 @@ select:hover, select:focus {
     padding: 2px 6px;
     height: 30px;
     text-decoration: none;
-    box-shadow: 5px 3px 10px black;
+    box-shadow: 5px 3px 10px red;
     text-align: center;
     color: white;
 }
@@ -425,23 +442,23 @@ select:hover, select:focus {
 }
 
 
-.Boton.BordeIzq {
-    border: 1px solid silver;
-    box-shadow: 1px 1px 1px 1px black;
-    border-left-width: 5px;
-    border-left-style: inset;
-    border-left-color: red;
-}
+    .Boton.BordeIzq {
+        border: 1px solid silver;
+        box-shadow: 1px 1px 1px 1px black;
+        border-left-width: 5px;
+        border-left-style: inset;
+        border-left-color: #9D4B19;
+    }
 
-.Boton.BordeAbajo {
-    box-shadow: 1px 1px 1px 2px silver;
-    border-top-width: 0px;
-    border-left-width: 0px;
-    border-right-width: 0px;
-    border-bottom-width: 3px;
-    border-bottom-style: inset;
-    border-bottom-color: red;
-}
+    .Boton.BordeAbajo {
+        box-shadow: 1px 1px 1px 2px silver;
+        border-top-width: 0px;
+        border-left-width: 0px;
+        border-right-width: 0px;
+        border-bottom-width: 3px;
+        border-bottom-style: inset;
+        border-bottom-color: #9D4B19;
+    }
 .Boton.BordeArriba {
     border-top-color: red;
     border-top-width: 2px;
@@ -449,10 +466,10 @@ select:hover, select:focus {
 }
 /***  colores de  boton ***/
 
-.Boton.ColorTema {
-    background:  #05488c;
-    color: #E6E6E6;
-}
+    .Boton.ColorTema {
+        background: #562203;
+        color: #E6E6E6;
+    }
 
 .Boton.Transparente {
     background: rgba(255, 255, 255,.5);
@@ -462,16 +479,16 @@ select:hover, select:focus {
 /***  tamaños  de boton ***/
 
 .Boton.Ch {
-    min-width: 6em;
+    min-width: 9em;
 }
 
 .Boton.Med {
-    width: 12em;
-}
+        min-width: 12em;
+ }
 
-.Boton.Gde {
-    width: 22em;
-}
+ Boton.Gde {
+        min-width: 22em;
+ }
 
 /***  efectos de boton ***/
 .Boton.Redondo {
@@ -499,7 +516,7 @@ select:hover, select:focus {
 
 .Boton:hover {
 /*background:rgba(255, 255, 255,.3);*/
-background:rgba(0, 0, 0,.5);
+background:rgba(0, 0, 0,.9);
 
 color: #E6E6E6;
     /*box-shadow:5px 3px 10px black ;*/
@@ -515,12 +532,12 @@ color: #E6E6E6;
 }
 
 .Boton.BordeAbajo:hover {
-    background: rgba(0, 0, 0,.5);
+    background: rgba(0, 0, 0,.8);
     /* background: red; */
     border-bottom-width: 3px;
     border-bottom-style: inset;
     border-bottom-color: silver;
-    color: black;
+    color: white;
 }
 
 .Boton.BordeArriba:hover {
@@ -545,8 +562,9 @@ background:rgba(0, 0, 0,.5);*/
 }
 
 .Boton.ColorTema:hover {
-    box-shadow: 5px 3px 10px dodgerblue;
+    box-shadow: 5px 3px 10px red;
 }
+
 
 .Boton.Transparente:hover {
     color: black;
@@ -615,13 +633,12 @@ background:rgba(0, 0, 0,.5);*/
 a {
     display: inline-block;
     min-width: 40px !important;
-
-    max-width: 45px;
+    max-width: 95px;
     text-decoration: none;
     padding: 2px;
     margin: 2px;
     background-color: transparent;
-    color: white;
+    color: #562203;
 }
 
     a:active,
@@ -630,6 +647,7 @@ a {
         color: whitesmoke;
         text-decoration: none;
         outline: 0;
+        box-shadow: 5px 3px 10px red;
     }
 
 
@@ -640,11 +658,12 @@ a {
     box-sizing: border-box;
     float: left;
     text-align: center;
+    left: 0px;
     width: 100%;
     height: 65px;
     padding: 1px 1px;
-    font-size: 12px;
-    background: #05488c;
+    font-size1 12px;
+    background: #9D4B19;
     z-index: 3000;
     color: silver;
     clear: both;
@@ -657,10 +676,10 @@ a {
         color: white;
     }
 
-        .FinalPagina a:hover {
-            background: rgba(0, 0, 0,.5);
-            color:red;
-        }
+    .FinalPagina a:hover {
+        background: rgba(0, 0, 0,.5);
+        color:red;
+    }
 /*      cambio   diseño  de iconos */
 .FinalPagina [class^="icon-"] {
     display: inline-block;
@@ -676,7 +695,7 @@ a {
     color: #1A1A7B;
 }
 
-    .FinalPagina[class^="icon-"]:hover {
+.FinalPagina[class^="icon-"]:hover {
     background: white;
     color: #1A1A7B;
 }

@@ -6,6 +6,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using  Sitio;
+
+using System.IO;
+using System.Drawing;
+using MessagingToolkit.QRCode.Codec;
+
 namespace Sitio
 {
     public partial class Pregistro : System.Web.UI.Page
@@ -29,12 +34,14 @@ namespace Sitio
                         registro = db.PreRegistro.Find(id);
                         limpiar();
                         asignar(id);
+                         btnRegistrar.Text = "Modificar";
                     }
                     else
                     {
                         agregar = true;
                         registro = new PreRegistro();
                         limpiar();
+                        btnRegistrar.Text = "Agregar";
                     }
              }
             if (agregar)
@@ -53,7 +60,7 @@ namespace Sitio
         
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("PreRegistros", false);
+            Response.Redirect("PreRegistrosConsulta", false);
         }
         protected void btnRegistrar_Click(object sender, EventArgs e)
         {
@@ -101,6 +108,7 @@ namespace Sitio
                 int r = db.SaveChanges();
                 String folio = registro.id.ToString();
                 mensaje = "Se agregó el folio: " + folio ;
+                generarQR(folio);
             }
             else
             {
@@ -108,19 +116,38 @@ namespace Sitio
                 int r = db.SaveChanges(); 
                 String folio = registro.id.ToString();
                 mensaje = "Se actualizó el folio: " + folio;
-          
+                generarQR(folio);
+
+
             }
-            if (agregar)
-                limpiar();
+            //if (agregar)
+            //    limpiar();
             lblOperacion.Text = mensaje;
             string script = "alert('" + mensaje + " ');";
 
             //ScriptManager.RegisterStartupScript(this, typeof(Page), "alerta", script, true);
          
         }
+        void generarQR(String folio)
+        {
+            String url = "http://ayrvanesa-001-site1.gtempurl.com/PreRegistro?id="+ folio;
+            QRCodeEncoder encoder = new QRCodeEncoder();
+            Bitmap img = encoder.Encode(url);
+            System.Drawing.Image qr = (System.Drawing.Image)img;
+            using (MemoryStream ms = new MemoryStream() )
+            {
+                qr.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                byte[] imageBytes = ms.ToArray();
+                imgQR.Src =  "data:image/gif;base64," + Convert.ToBase64String(imageBytes);
+                imgQR.Height = 200;
+                imgQR.Width = 200;
+            }
+        }
         void limpiar()
         {
             btnRegistrar.Enabled = true;
+            lblOperacion.Text = "";
+            imgQR.Src = "";
             if (agregar)
             {
                 txtGrupo.Visible = false;

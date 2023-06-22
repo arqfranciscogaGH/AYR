@@ -18,25 +18,30 @@ namespace Sitio
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
-
-            //config.Routes.MapHttpRoute(
-            //    name: "DefaultApiFiltro",
-            //    routeTemplate: "api/{controller}/{filtro}",
-            //    defaults: new { filtro = RouteParameter.Optional }
-            //);
+                   name: "DefaultApi",
+                   routeTemplate: "api/{controller}",
+                   defaults: null
+               );
+   
             config.Routes.MapHttpRoute(
-                name: "DefaultApipPorPagina",
-                routeTemplate: "api/{controller}/{pagina}/{registros}",
-                defaults: new { pagina = RouteParameter.Optional , registros = RouteParameter.Optional }
+                name: "RegistrosLlave",
+                routeTemplate: "api/{controller}/{llave}",
+                defaults: new { llave = RouteParameter.Optional }
             );
             config.Routes.MapHttpRoute(
-                 name: "DefaultApipPorPaginaFiltro",
-                 routeTemplate: "api/{controller}/{pagina}/{registros}/{filtro}",
-                 defaults: new { pagina = RouteParameter.Optional, registros = RouteParameter.Optional , filtro = RouteParameter.Optional }
+                name: "RegistrosIdLlave",
+                routeTemplate: "api/{controller}/{id}/{llave}",
+                defaults: new { id = RouteParameter.Optional , llave = RouteParameter.Optional }
+            );
+            config.Routes.MapHttpRoute(
+                name: "RegistrosPorPagina",
+                routeTemplate: "api/{controller}/{pagina}/{registrosPorPagina}/{llave}",
+                defaults: new { pagina = RouteParameter.Optional , registrosPorPagina = RouteParameter.Optional, llave = RouteParameter.Optional }
+            );
+            config.Routes.MapHttpRoute(
+                 name: "RegistrosPorPaginaFiltro",
+                 routeTemplate: "api/{controller}/{pagina}/{registrosPorPagina}/{filtro}/{llave}",
+                 defaults: new { pagina = RouteParameter.Optional, registrosPorPagina = RouteParameter.Optional , filtro = RouteParameter.Optional , llave = RouteParameter.Optional }
              );
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));

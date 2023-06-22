@@ -1,0 +1,184 @@
+﻿@model Sitio.PreRegistro
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+@*<h2>Delete</h2>*@
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Eliminar registro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.genero)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.genero)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.edad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.edad)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.fechaNacimiento)
+        </dt>*@
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaNacimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estadoCivil)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estadoCivil)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.correo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.correo)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.tieneReligion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tieneReligion)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.religion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.religion)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.tieneCongregacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tieneCongregacion)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.congregacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.congregacion)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.tieneEnfermedad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tieneEnfermedad)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.enfermedad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.enfermedad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tieneRetiroT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tieneRetiroT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.invitador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.invitador)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.info)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.info)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.notas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.notas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idSuscriptor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idSuscriptor)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estatus)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Eliminar" class="btn btn-default" /> |
+        @Html.ActionLink("Regresar", "Index")
+    </div>
+    }
+</div>

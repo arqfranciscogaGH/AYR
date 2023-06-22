@@ -5,6 +5,52 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Modelo.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CuentaUsuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cuenta" Type="varchar" MaxLength="100" />
+          <Property Name="Contrasena" Type="varchar" MaxLength="250" />
+          <Property Name="IdEstacionTrabajo" Type="varchar" MaxLength="50" />
+          <Property Name="IdUsuarioSuperior" Type="int" />
+          <Property Name="FechaRegistro" Type="smalldatetime" />
+          <Property Name="FechaVigencia" Type="smalldatetime" />
+          <Property Name="FechaCambioEstatus" Type="smalldatetime" />
+          <Property Name="Tema" Type="varchar" MaxLength="30" />
+          <Property Name="IdEstatusUsuario" Type="smallint" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdSuscriptor" Type="int" />
+          <Property Name="Sesiones" Type="int" />
+          <Property Name="Intentos" Type="int" />
+          <Property Name="IdIdioma" Type="int" />
+          <Property Name="Perfiles" Type="nvarchar(max)" />
+          <Property Name="Grupos" Type="nvarchar(max)" />
+          <Property Name="Expira" Type="bit" />
+          <Property Name="Privilegios" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RFC" Type="varchar" MaxLength="15" />
+          <Property Name="FechaNacimiento" Type="date" />
+          <Property Name="Curp" Type="varchar" MaxLength="19" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="50" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="50" />
+          <Property Name="Genero" Type="varchar" MaxLength="1" />
+          <Property Name="Correo" Type="varchar" MaxLength="150" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="TelefonoMovil" Type="varchar" MaxLength="30" />
+          <Property Name="Saldo" Type="decimal" Precision="14" Scale="2" />
+          <Property Name="IdSuscriptor" Type="int" />
+          <Property Name="IdUsuario" Type="int" Nullable="false" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="Tipo" Type="varchar" MaxLength="2" />
+          <Property Name="IdTipoPersona" Type="varchar" MaxLength="2" />
+        </EntityType>
         <EntityType Name="PreRegistro">
           <Key>
             <PropertyRef Name="id" />
@@ -33,12 +79,59 @@
           <Property Name="clase" Type="varchar(max)" />
           <Property Name="ministerios" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clave" Type="nvarchar" MaxLength="50" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="150" />
+          <Property Name="descripcion" Type="nvarchar(max)" />
+          <Property Name="clase" Type="nvarchar" MaxLength="50" />
+          <Property Name="subclase" Type="nvarchar" MaxLength="50" />
+          <Property Name="precio" Type="float" />
+          <Property Name="existencia" Type="int" />
+          <Property Name="fechaEstatus" Type="datetime" />
+          <Property Name="estatus" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Suscripcion">
+          <Key>
+            <PropertyRef Name="IdSuscriptor" />
+          </Key>
+          <Property Name="IdSuscriptor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCorto" Type="varchar" MaxLength="50" />
+          <Property Name="Tipo" Type="varchar" MaxLength="3" />
+          <Property Name="FechaContratacion" Type="smalldatetime" />
+          <Property Name="FechaInicio" Type="smalldatetime" />
+          <Property Name="FechaVencimiento" Type="smalldatetime" />
+          <Property Name="Servicios" Type="varchar" MaxLength="250" />
+          <Property Name="NumeroUsuarios" Type="smallint" />
+          <Property Name="IdPersona" Type="int" />
+          <Property Name="Activo" Type="bit" />
+          <Property Name="IdSuscriptorSuperior" Type="int" />
+          <Property Name="Descripcion" Type="varchar(max)" />
+        </EntityType>
         <Function Name="PaginarPreRegistro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="pagenum" Type="int" Mode="In" />
           <Parameter Name="pagesize" Type="int" Mode="In" />
         </Function>
+        <Function Name="RegistrarSuscripcionLLave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idSuscriptor" Type="int" Mode="In" />
+          <Parameter Name="cuenta" Type="varchar" Mode="In" />
+          <Parameter Name="servicio" Type="varchar" Mode="In" />
+          <Parameter Name="estacionTrabajo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="VerificarSuscripcionLLave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idSuscriptor" Type="int" Mode="In" />
+          <Parameter Name="llave" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="llaveE" Type="varbinary(max)" Mode="In" />
+        </Function>
         <EntityContainer Name="ModeloStoreContainer">
+          <EntitySet Name="CuentaUsuario" EntityType="Self.CuentaUsuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PreRegistro" EntityType="Self.PreRegistro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suscripcion" EntityType="Self.Suscripcion" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -50,6 +143,21 @@
             <Parameter Name="pagenum" Mode="In" Type="Int32" />
             <Parameter Name="pagesize" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="CuentaUsuario" EntityType="Modelo.CuentaUsuario" />
+          <EntitySet Name="Persona" EntityType="Modelo.Persona" />
+          <EntitySet Name="Suscripcion" EntityType="Modelo.Suscripcion" />
+          <FunctionImport Name="RegistrarSuscripcionLLave" ReturnType="Collection(Modelo.RegistrarSuscripcionLLave_Result)">
+            <Parameter Name="idSuscriptor" Mode="In" Type="Int32" />
+            <Parameter Name="cuenta" Mode="In" Type="String" />
+            <Parameter Name="servicio" Mode="In" Type="String" />
+            <Parameter Name="estacionTrabajo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="VerificarSuscripcionLLave" ReturnType="Collection(Modelo.VerificarSuscripcionLLave_Result)">
+            <Parameter Name="idSuscriptor" Mode="In" Type="Int32" />
+            <Parameter Name="llave" Mode="In" Type="String" />
+            <Parameter Name="llaveE" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <EntitySet Name="Producto" EntityType="Modelo.Producto" />
         </EntityContainer>
         <EntityType Name="PreRegistro">
           <Key>
@@ -104,6 +212,98 @@
           <Property Type="String" Name="clase" Nullable="true" />
           <Property Type="String" Name="ministerios" Nullable="true" />
         </ComplexType>
+        <EntityType Name="CuentaUsuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstacionTrabajo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioSuperior" Type="Int32" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="0" />
+          <Property Name="FechaVigencia" Type="DateTime" Precision="0" />
+          <Property Name="FechaCambioEstatus" Type="DateTime" Precision="0" />
+          <Property Name="Tema" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstatusUsuario" Type="Int16" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdSuscriptor" Type="Int32" />
+          <Property Name="Sesiones" Type="Int32" />
+          <Property Name="Intentos" Type="Int32" />
+          <Property Name="IdIdioma" Type="Int32" />
+          <Property Name="Perfiles" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Grupos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Expira" Type="Boolean" />
+          <Property Name="Privilegios" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RFC" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="Curp" Type="String" MaxLength="19" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Genero" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoMovil" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Saldo" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="IdSuscriptor" Type="Int32" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="Tipo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoPersona" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Suscripcion">
+          <Key>
+            <PropertyRef Name="IdSuscriptor" />
+          </Key>
+          <Property Name="IdSuscriptor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCorto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="FechaContratacion" Type="DateTime" Precision="0" />
+          <Property Name="FechaInicio" Type="DateTime" Precision="0" />
+          <Property Name="FechaVencimiento" Type="DateTime" Precision="0" />
+          <Property Name="Servicios" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroUsuarios" Type="Int16" />
+          <Property Name="IdPersona" Type="Int32" />
+          <Property Name="Activo" Type="Boolean" />
+          <Property Name="IdSuscriptorSuperior" Type="Int32" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="RegistrarSuscripcionLLave_Result">
+          <Property Type="Int32" Name="id" Nullable="true" />
+          <Property Type="String" Name="llave" Nullable="true" />
+          <Property Type="DateTime" Name="fechaVencimiento" Nullable="true" Precision="16" />
+          <Property Type="Int32" Name="tiempo" Nullable="true" />
+          <Property Type="Int32" Name="diasVigencia" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="VerificarSuscripcionLLave_Result">
+          <Property Type="Int32" Name="id" Nullable="true" />
+          <Property Type="String" Name="llave" Nullable="true" />
+          <Property Type="DateTime" Name="fechaVencimiento" Nullable="true" Precision="16" />
+          <Property Type="Int32" Name="tiempo" Nullable="true" />
+          <Property Type="Int32" Name="díasVigencia" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="clase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="subclase" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="precio" Type="Double" />
+          <Property Name="existencia" Type="Int32" />
+          <Property Name="fechaEstatus" Type="DateTime" Precision="3" />
+          <Property Name="estatus" Type="Int16" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -168,6 +368,110 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="CuentaUsuario">
+            <EntityTypeMapping TypeName="Modelo.CuentaUsuario">
+              <MappingFragment StoreEntitySet="CuentaUsuario">
+                <ScalarProperty Name="Privilegios" ColumnName="Privilegios" />
+                <ScalarProperty Name="Expira" ColumnName="Expira" />
+                <ScalarProperty Name="Grupos" ColumnName="Grupos" />
+                <ScalarProperty Name="Perfiles" ColumnName="Perfiles" />
+                <ScalarProperty Name="IdIdioma" ColumnName="IdIdioma" />
+                <ScalarProperty Name="Intentos" ColumnName="Intentos" />
+                <ScalarProperty Name="Sesiones" ColumnName="Sesiones" />
+                <ScalarProperty Name="IdSuscriptor" ColumnName="IdSuscriptor" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdEstatusUsuario" ColumnName="IdEstatusUsuario" />
+                <ScalarProperty Name="Tema" ColumnName="Tema" />
+                <ScalarProperty Name="FechaCambioEstatus" ColumnName="FechaCambioEstatus" />
+                <ScalarProperty Name="FechaVigencia" ColumnName="FechaVigencia" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="IdUsuarioSuperior" ColumnName="IdUsuarioSuperior" />
+                <ScalarProperty Name="IdEstacionTrabajo" ColumnName="IdEstacionTrabajo" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="Cuenta" ColumnName="Cuenta" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persona">
+            <EntityTypeMapping TypeName="Modelo.Persona">
+              <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="IdTipoPersona" ColumnName="IdTipoPersona" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdSuscriptor" ColumnName="IdSuscriptor" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="TelefonoMovil" ColumnName="TelefonoMovil" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Curp" ColumnName="Curp" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suscripcion">
+            <EntityTypeMapping TypeName="Modelo.Suscripcion">
+              <MappingFragment StoreEntitySet="Suscripcion">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdSuscriptorSuperior" ColumnName="IdSuscriptorSuperior" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="NumeroUsuarios" ColumnName="NumeroUsuarios" />
+                <ScalarProperty Name="Servicios" ColumnName="Servicios" />
+                <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaContratacion" ColumnName="FechaContratacion" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="NombreCorto" ColumnName="NombreCorto" />
+                <ScalarProperty Name="IdSuscriptor" ColumnName="IdSuscriptor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="RegistrarSuscripcionLLave" FunctionName="Modelo.Store.RegistrarSuscripcionLLave">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Modelo.RegistrarSuscripcionLLave_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="llave" ColumnName="llave" />
+                <ScalarProperty Name="fechaVencimiento" ColumnName="fechaVencimiento" />
+                <ScalarProperty Name="tiempo" ColumnName="tiempo" />
+                <ScalarProperty Name="diasVigencia" ColumnName="diasVigencia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VerificarSuscripcionLLave" FunctionName="Modelo.Store.VerificarSuscripcionLLave">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Modelo.VerificarSuscripcionLLave_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="llave" ColumnName="llave" />
+                <ScalarProperty Name="fechaVencimiento" ColumnName="fechaVencimiento" />
+                <ScalarProperty Name="tiempo" ColumnName="tiempo" />
+                <ScalarProperty Name="díasVigencia" ColumnName="díasVigencia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="Modelo.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="estatus" ColumnName="estatus" />
+                <ScalarProperty Name="fechaEstatus" ColumnName="fechaEstatus" />
+                <ScalarProperty Name="existencia" ColumnName="existencia" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="subclase" ColumnName="subclase" />
+                <ScalarProperty Name="clase" ColumnName="clase" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -8,10 +8,10 @@ namespace Sitio.Comun.Clases
 
     public class Paginador<T> where T : class
     {
-        public int PaginaActual { get; set; }
-        public int RegistrosPorPagina { get; set; }
-        public int TotalRegistros { get; set; }
-        public int TotalPaginas { get; set; }
-        public IEnumerable<T> Resultado { get; set; }
+        public int paginaActual { get; set; }
+        public int registrosPorPagina { get; set; }
+        public int totalRegistros { get; set; }
+        public int totalPaginas { get; set; }
+        public IEnumerable<T> resultado { get; set; }
     }
 }

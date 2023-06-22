@@ -53,6 +53,24 @@
     <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
     </Reference>
+    <Reference Include="MeNet.Nucleo.ConsultorDinamico">
+      <HintPath>..\..\libreriasCompiladas\MeNet.Nucleo.ConsultorDinamico.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagingToolkit.Barcode, Version=1.8.3.0, Culture=neutral, PublicKeyToken=4d44dd7196d3c1ac, processorArchitecture=MSIL">
+      <HintPath>packages\MessagingToolkit.1.8.3\lib\net462\MessagingToolkit.Barcode.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagingToolkit.Core, Version=1.8.3.0, Culture=neutral, PublicKeyToken=4d44dd7196d3c1ac, processorArchitecture=MSIL">
+      <HintPath>packages\MessagingToolkit.1.8.3\lib\net462\MessagingToolkit.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagingToolkit.MMS, Version=1.8.3.0, Culture=neutral, PublicKeyToken=4d44dd7196d3c1ac, processorArchitecture=MSIL">
+      <HintPath>packages\MessagingToolkit.1.8.3\lib\net462\MessagingToolkit.MMS.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagingToolkit.Pdu, Version=1.8.3.0, Culture=neutral, PublicKeyToken=4d44dd7196d3c1ac, processorArchitecture=MSIL">
+      <HintPath>packages\MessagingToolkit.1.8.3\lib\net462\MessagingToolkit.Pdu.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagingToolkit.QRCode, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MessagingToolkit.QRCode.1.3.0\lib\MessagingToolkit.QRCode.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
@@ -222,8 +240,10 @@
     <Content Include="Content\Iconos\sort_desc.png" />
     <Content Include="Content\Iconos\sort_desc3.png" />
     <Content Include="Content\img\Encabezado.png" />
+    <Content Include="Content\img\Encabezado2.jpg" />
     <Content Include="Content\img\evento.jpg" />
     <Content Include="Content\img\pie.png" />
+    <Content Include="Content\img\pie2.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
@@ -302,11 +322,11 @@
     <Content Include="Views\web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\PreRegistros\Create.cshtml" />
-    <Content Include="Views\PreRegistros\Delete.cshtml" />
-    <Content Include="Views\PreRegistros\Details.cshtml" />
-    <Content Include="Views\PreRegistros\Edit.cshtml" />
-    <Content Include="Views\PreRegistros\Index.cshtml" />
+    <Content Include="Views\PreRegistrosConsulta\Create.cshtml" />
+    <Content Include="Views\PreRegistrosConsulta\Delete.cshtml" />
+    <Content Include="Views\PreRegistrosConsulta\Details.cshtml" />
+    <Content Include="Views\PreRegistrosConsulta\Edit.cshtml" />
+    <Content Include="Views\PreRegistrosConsulta\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -319,8 +339,11 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Comun\Clases\Autentificacion.cs" />
     <Compile Include="Comun\Clases\Columna.cs" />
+    <Compile Include="Comun\Clases\Cuenta.cs" />
     <Compile Include="Comun\Clases\Paginador.cs" />
+    <Compile Include="Comun\Clases\AutenticacionLlave.cs" />
     <Compile Include="Consulta.aspx.cs">
       <DependentUpon>Consulta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -335,8 +358,15 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\CuentaUsuariosController.cs" />
+    <Compile Include="Controllers\EjemploController.cs" />
+    <Compile Include="Controllers\PreRegistrosConsultaController.cs" />
+    <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\PreRegistrosController.cs" />
-    <Compile Include="Controllers\RegistrosController.cs" />
+    <Compile Include="Controllers\AutetificacionController.cs" />
+    <Compile Include="CuentaUsuario.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -365,6 +395,9 @@
     <Compile Include="PaginarPreRegistro_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Persona.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="PreRegistro.aspx.cs">
       <DependentUpon>PreRegistro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -375,6 +408,9 @@
     <Compile Include="PreRegistro.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Producto.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Prueba.aspx.cs">
       <DependentUpon>Prueba.aspx</DependentUpon>
@@ -382,6 +418,9 @@
     </Compile>
     <Compile Include="Prueba.aspx.designer.cs">
       <DependentUpon>Prueba.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrarSuscripcionLLave_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -396,6 +435,12 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Suscripcion.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerificarSuscripcionLLave_Result.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
@@ -415,6 +460,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
+    <Content Include="Views\CuentaUsuarios\Create.cshtml" />
+    <Content Include="Views\CuentaUsuarios\Delete.cshtml" />
+    <Content Include="Views\CuentaUsuarios\Details.cshtml" />
+    <Content Include="Views\CuentaUsuarios\Edit.cshtml" />
+    <Content Include="Views\CuentaUsuarios\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
